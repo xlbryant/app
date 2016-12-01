@@ -1,0 +1,37 @@
+<style>
+    .ngdialog-content{
+        overflow-y:scroll; 
+        /*border-left:1px solid #fff;*/
+    }
+    .leftlabel{
+        position: fixed;
+    }
+    .rightlabel{
+        float: right;
+    }
+
+</style>
+<div>
+    <div class = "col-sm-2 col-md-2 col-lg-2 leftlabel">
+        <div ng-repeat = "(indexs,items) in datails">
+                <ul ng-repeat="(index,item) in items" class = "list-group">
+                    <li ng-click="scrollto('{{index}}')"  ng-if ="index != 'temp'" class = "list-group-item">
+                        <a>{{index}}</a>
+                        <i class = "fa fa-fw fa-chevron-right iconss">
+                        </i>
+                    </li>    
+                </ul>
+        </div>   
+    </div>     
+    <div class = "col-sm-9 col-md-9 col-lg-9 rightlabel">
+        <h2>{{Name}}</h2>
+        <div ng-repeat = "(indexs,items) in datails">
+                <div ng-repeat="(index,item) in items">
+                    <h3 id = '{{index}}' ng-if = "index != 'temp'">{{index}}</h3>
+                    <span ng-repeat="(ii,it) in item">
+                        &nbsp&nbsp{{it[1]}}
+                    </span>
+                </div>
+        </div>        
+     </div> 
+</div>

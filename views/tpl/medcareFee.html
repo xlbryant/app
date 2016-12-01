@@ -1,0 +1,203 @@
+<div ng-controller="MedcareFeeController">
+    <!-- items overview start -->
+    <div class="row">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div class="widget">
+                <div class="widget-header">
+                    <!--<i class="widget-icon fa fa-arrows-v blue"></i>-->
+                    <span class="widget-caption">医保控费</span>
+                    <div class="widget-buttons">
+                        <a href="" widget-config></a>
+                        <a href="" widget-maximize></a>
+                        <a href="" widget-collapse></a>
+                        <a href="" widget-dispose></a>
+                    </div><!--Widget Buttons-->
+                </div><!--Widget Header-->
+                <div class="widget-body">
+                    <!--  all info overview start  -->
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th ng-repeat="column in vm.columns" ng-click="vm.sort.toggle(column)"
+                                ng-class="{sortable: column.sortable !== false}">
+                                {{column.label}}
+                                <i ng-if="column.name === vm.sort.column && vm.sort.direction"
+                                   class="glyphicon {{vm.sort.direction|orderClass}}"></i>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><input type="text" ng-model="vm.filter.id" class="form-control"/></td>
+                            <td><input type="text" ng-model="vm.filter.item_name" class="form-control"/></td>
+                            <td><input type="text" ng-model="vm.filter.item_fee" class="form-control"/></td>
+                            <!--<td><input type="text" ng-model="vm.filter.adoption" class="form-control"/></td>-->
+                            <!--<td><input type="text" ng-model="vm.filter.cost_mean" class="form-control"/></td>-->
+                            <!--<td><input type="text" ng-model="vm.filter.cost_std" class="form-control"/></td>-->
+                            <td><input type="text" ng-model="vm.filter.score" class="form-control"/></td>
+                            <!--<td><input type="text" ng-model="vm.filter.is_in_standard_path" class="form-control"/></td>-->
+                            <td><input type="text" ng-model="vm.filter.state" class="form-control"/></td>
+                            <td  style="width: 30%"><input type="text" ng-model="vm.filter.reason" class="form-control"/></td>
+                            <td  style="width: 30%"><input type="text" ng-model="vm.filter.comment" class="form-control"/></td>
+                        </tr>
+                        <tr ng-repeat="item in vm.allMem|filter:vm.filter|orderBy:vm.sort.column:vm.sort.direction===-1|paging:vm.page.index:vm.page.size" ng-click="vm.getDetails(item.id)">
+                            <td>
+                                {{item.id}}
+                            </td>
+                            <td>
+                                {{item.item_name}}
+                            </td>
+                            <td>
+                                {{item.item_fee.toFixed(2)}}
+                            </td>
+                            <!--<td>-->
+                            <!--{{item.adoption}}-->
+                            <!--</td>-->
+                            <!--<td>-->
+                            <!--{{item.cost_mean}}-->
+                            <!--</td>-->
+                            <!--<td>-->
+                            <!--{{item.cost_std}}-->
+                            <!--</td>-->
+                            <td>
+                                {{item.score.toFixed(3)}}
+                            </td>
+                            <td class="{{item.stateClass}}">
+                                {{item.state}}
+                            </td>
+                            <td>
+                                {{item.reason}}
+                            </td>
+                            <td>
+                                {{item.comment}}
+                            </td>
+                            <!--<td class="text-right">-->
+                            <!--{{}}-->
+                            <!--</td>-->
+                        </tr>
+                        </tbody>
+                    </table>
+                    <uib-pagination total-items="vm.allMem|filter:vm.filter|size" ng-model="vm.page.index" max-size="5"
+                                items-per-page="vm.page.size"  previous-text="上一页" next-text="下一页"
+                                class="pagination"></uib-pagination>
+                    <!--first-text="第一页" last-text="最后页"  boundary-links="true" -->
+                    <!--  all info overview end  -->
+                </div><!--Widget Body-->
+            </div><!--Widget-->
+        </div>
+    </div>
+    <!-- items overview END -->
+    <!--  info regist and update start  -->
+    <div class="modal fade" id="itemDetails" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">条目细节</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover">
+                        <tbody>
+                        <tr>
+                            <td>
+                                名称
+                            </td>
+                            <td>
+                                {{vm.details.item_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                费用
+                            </td>
+                            <td>
+                                {{vm.details.item_fee.toFixed(2)}}  元
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                使用率
+                            </td>
+                            <td>
+                                {{(vm.details.adoption*100).toFixed(1)}}%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                平均费用
+                            </td>
+                            <td>
+                                {{vm.details.cost_mean.toFixed(3)}}  元
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                费用标准差
+                            </td>
+                            <td>
+                                {{vm.details.cost_std.toFixed(3)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                是否在标准路径中
+                            </td>
+                            <td>
+                                {{vm.isStateDic[vm.details.is_in_standard_path]}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                得分
+                            </td>
+                            <td>
+                                {{vm.details.score.toFixed(3)}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                得分原因
+                            </td>
+                            <td>
+                                {{vm.details.reason}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                状态
+                            </td>
+                            <td ng-show="!vm.stateChangeDisable">
+                                <!--{{vm.details.state}}-->
+                                <button type="button" class="btn" ng-class="{ 'btn-primary': vm.isAccepted === true}" ng-click="vm.toggleIsAccepted()">Accepted</button>
+                                <button type="button" class="btn" ng-class="{ 'btn-primary': vm.isAccepted !== true}" ng-click="vm.toggleIsAccepted()">Rejected</button>
+                                <!--<label>-->
+                                    <!--<select style="font-size: 16px;font-family: 黑体" class="form-control" ng-model="vm.stateCodeValue" ng-options="state.code as state.stateName for state in vm.itemStates"-->
+                                    <!--ng-change="vm.itemSelected(vm.stateCodeValue)">-->
+                                        <!--<option value="">请选择状态</option>-->
+                                    <!--</select>-->
+                                <!--</label>-->
+                            </td>
+                            <td ng-show="vm.stateChangeDisable">
+                                {{vm.details.state}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                备注
+                            </td>
+                            <td>
+                                <textarea style="resize: vertical" rows="4" class="form-control" ng-model="vm.details.comment"></textarea>
+                                <!--<input style="height: 120px" type="search" class="form-control" ng-model="vm.details.comment"/>-->
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="vm.confirm(vm.details.id)">确认</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.cancel()">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  info regist and update start  -->
+</div>

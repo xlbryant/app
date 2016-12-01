@@ -1,0 +1,116 @@
+<style>
+    .gridStyle {
+        border: 1px solid rgb(212,212,212);
+        height: 800px;
+    }
+</style>
+<!--<div class="page-breadcrumbs">
+    <ul class="breadcrumb">
+        <li>
+            <i class="fa fa-home"></i>
+            <a href="#" >{{class1}}</a>
+        </li>
+        <li>
+            <a href="#">{{class2}}</a>
+        </li>
+        <li ng-if = "class3 != ''">
+            <a href="#">{{class3}}</a>
+        </li>
+        <li ng-if = "class4 != ''">
+        <li class="active" >{{class4}}</li>
+    </ul>
+</div>-->
+<div class="row">
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">{{class3}}</span>
+                <div class="widget-buttons">
+                    <a href="" widget-maximize ng-click="isMax = !isMax;RenderBubbleChart();"></a>
+                    <a href="" widget-collapse></a>
+                    <a href="" widget-dispose></a>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="gridStyle" ng-grid="gridOptions">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #3c8dbc; text-align:center " class="modal-title bigtitle" id="myModalLabel">{{Name}}</h2>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                </button>
+            </div>
+            <div class="modal-body" du-scroll-container>
+                <div>
+                    <div class = "col-sm-3 col-md-3 col-lg-3" role="complementary">
+                        <ul  class="nav nav-list bs-docs-sidenav affix" id="gundongtiao">
+                            <div ng-repeat = "(indexs,items) in datails">
+                            <!--{{items}}-->
+
+                                <div ng-repeat="(index,iterm) in items" >
+                                    <li class="addAHover modalMenu" href="#{{index}}" ng-if="index !== 'temp'" du-smooth-scroll du-scrollspy>
+                                        <a >
+                                            <i class="fa fa-fw fa-chevron-right iconss"></i>
+                                            {{index}}
+                                        </a>
+                                    </li>
+                                </div>
+
+                                <!--<li ng-click="scrollto('{{index}}')"  ng-if ="index != 'temp'" class = "list-group-item">
+                                    <a>{{index}}</a>
+                                    <i class = "fa fa-fw fa-chevron-right iconss">
+                                    </i>
+                                </li>-->
+
+                            </div>
+                        </ul>
+                    </div>
+                    <div class = "col-sm-9 col-md-9 col-lg-9" role="main">
+                        <div ng-repeat = "(indexs,items) in datails">
+                            <div ng-repeat="(index,item) in items">
+                                <h3 id = '{{index}}' ng-if = "index != 'temp'">{{index}}</h3>
+                                <span ng-repeat="(ii,it) in item">
+                        &nbsp&nbsp{{it[1]}}
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+            

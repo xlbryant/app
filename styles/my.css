@@ -1,0 +1,149 @@
+circle {
+    opacity: 0.7;
+}
+.longTerm{
+    fill:green
+}
+.shortTerm{
+    fill:steelblue
+}
+.nurseItem{
+    fill:purple
+}
+.treatItem{
+    fill:orange
+}
+.personalLink {
+    stroke-width: 1px;
+    /*stroke:#000;*/
+    fill:#0f0;
+    opacity: 0.2;
+}
+.standardLink {
+    stroke-width: 1px;
+    /*stroke:#000;*/
+    fill:#00f;
+    opacity: 0.2;
+}
+#clinicPath svg{
+    background-color: #eeeeee;
+}
+.phasesLines {
+    stroke-width: 1;
+    stroke:steelblue;
+    fill:none;
+    opacity: 0.5;
+}
+/************************** d3-tip style **************************/
+.d3-tip {
+    line-height: 1;
+    font-weight: bold;
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+    z-index: 999;
+}
+
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    content: "\25BC";
+    position: absolute;
+    text-align: center;
+}
+
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+}
+/************************** d3-tip style End **************************/
+/*circle {*/
+    /*!* doesn't work in IE *!*/
+    /*transform: scale(2, 1.5);*/
+/*}*/
+/*************************** loading spinner *********************************/
+.spinner {
+    width: 100px;
+    height: 100px;
+    background-color: #2dc3e8;
+
+    margin: 100px auto;
+    -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-rotateplane {
+    0% { -webkit-transform: perspective(120px) }
+    50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+    100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes sk-rotateplane {
+    0% {
+        transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+    } 50% {
+          transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+          -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+      } 100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+}
+/**************** grids style ************************/
+.itemApproved {
+    background-color: #BBFFFF;
+}
+.itemAccepted {
+    background-color: #9AFF9A;
+}
+.itemPending {
+    background-color: #FFEFD5;
+}
+.itemRejected {
+    background-color: #F08080;
+}
+/**************** dc.js addition css*****************************/
+#cfCostBar .x.axis text {
+    text-anchor: end !important;
+    transform: rotate(-45deg);
+}
+#cfCostBar .y.axis {
+    display: none;
+}
+#cfCostBar text {
+    position: relative;
+    top: 30px;
+}
+
+/* 设置滚动条的样式 */::-webkit-scrollbar {  width: 12px;}
+/* 滚动槽 */::-webkit-scrollbar-track {
+             -webkit-box-shadow: inset 0 0 6px rgba(70,130,180,0.3);
+             border-radius: 10px;
+         }
+/* 滚动条滑块 */::-webkit-scrollbar-thumb {
+               border-radius: 10px;
+               background: rgba(70,130,180,0.666);
+               -webkit-box-shadow: inset 0 0 6px rgba(70,130,180,1);
+           }
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(70,130,180,0.4);
+}
+/**/
+.addAHover:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+.modalMenu{
+    border: 1px solid #e5e5e5;
+    margin: 0 0 -1px;
+    padding: 8px 14px
+}

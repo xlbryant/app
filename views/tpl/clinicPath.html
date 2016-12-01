@@ -1,0 +1,111 @@
+<!--<div class="row" id="tipTest">-->
+    <!--<div class="col-lg-12 col-sm-12 col-xs-12">-->
+        <!--<div class="widget">-->
+            <!--<div class="widget-header" >-->
+                <!--<i class="widget-icon fa fa-check"></i>-->
+                <!--<span class="widget-caption">Clinic Pathway Comparison</span>-->
+                <!--<div class="widget-buttons">-->
+                    <!--<a href="" widget-config></a>-->
+                    <!--<a href="" widget-maximize></a>-->
+                    <!--<a href="" widget-collapse></a>-->
+                    <!--<a href="" widget-dispose></a>-->
+                <!--</div>&lt;!&ndash;Widget Buttons&ndash;&gt;-->
+            <!--</div>&lt;!&ndash;Widget Header&ndash;&gt;-->
+            <!--<div class="widget-body" style="height: auto">-->
+                <!--<div ng-controller="CPcomparisonController">-->
+                    <!--<div id="clinicPath">-->
+                    <!--</div>-->
+                    <!--<div class="well well-sm" style="background-color: #C1FFC1;height: 70px;width: 800px">-->
+                        <!--<div id="showReason"></div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash;<div ng-controller="CPcomparisonController2">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div id="clinicPath2">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="well well-sm" style="background-color: #C1FFC1;height: 70px;width: 800px">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div id="showReason2"></div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>&lt;!&ndash;Widget Body&ndash;&gt;-->
+        <!--</div>&lt;!&ndash;Widget&ndash;&gt;-->
+    <!--</div>-->
+<!--</div>-->
+
+
+    <div class="row" ng-controller="CPcomparisonController">
+        <div class="col-lg-12 col-sm-12 col-xs-12">
+            <div id="simplewizard" class="wizard" data-target="#simplewizard-steps" ui-jq="wizard">
+                <ul class="steps">
+                    <li data-target="#simplewizardstep1" class="active"><span class="step">1</span>路径得分概览<span class="chevron"></span></li>
+                    <li data-target="#simplewizardstep2"><span class="step">2</span>路径比较<span class="chevron"></span></li>
+                </ul>
+            </div>
+            <div class="step-content" id="simplewizard-steps">
+                <div class="step-pane active" id="simplewizardstep1">
+                    <div class="row">
+                        <div class="col-lg-3" style="width: 30%">
+                            <div id="cfGraphs" style="overflow: auto">
+                                <button type="button" class="btn btn-default" ng-click="vm.reset.all()" style="left: 42%">重置所有</button>
+                                <div id="cfPathwayBar">
+                                    <!--<div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>-->
+                                        <!--<a ng-click="vm.reset.pathwayChart()">reset</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div id="cfGenderBar">
+                                    <!--<div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>-->
+                                    <!--<a ng-click="vm.reset.genderChart()">reset</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div id="cfAgeRangBar">
+                                    <!--<div class="reset" style="visibility: hidden;">range: <span class="filter"></span>-->
+                                        <!--<a ng-click="vm.reset.ageRangeChart()">reset</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <!--<div id="cfAgePathwayRangeBar" style="height: 250px">-->
+                                    <!--<div class="reset" style="visibility: hidden;">range: <span class="filter"></span>-->
+                                        <!--<a ng-click="vm.reset.agePathwayRangeChart()">reset</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <div id="cfStayLengthBar">
+                                    <!--<div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>-->
+                                        <!--<a ng-click="vm.reset.stayLengthChart()">reset</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div id="cfCostBar">
+                                    <!--<div class="reset" style="visibility: hidden;">selected: <span class="filter"></span>-->
+                                        <!--<a ng-click="vm.reset.costChar()">reset</a>-->
+                                    <!--</div>-->
+                                </div>
+                                <div id="cfDepartmentBar"></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9" style="width: 70%">
+                            <div id="patientsOverview" style="overflow: auto;height: 600px"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="step-pane" id="simplewizardstep2">
+                    <div>
+                        <div ng-class="{true:'spinner',false:''}[vm.isLoading]"></div>
+                        <div ng-show="!vm.isLoading" ng-cloak>
+                            <div id="patientInfo" style="width: 30%;height: 0"></div>
+                            <div id="cpLegend" style="width: 60%"></div>
+
+                            <div id="clinicPath"></div>
+                            <div class="well well-sm" style="background-color: #D1EEEE;height: 70px">
+                                <div id="showReason"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions actions-footer" id="simplewizard-actions">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm btn-prev"> <i class="fa fa-angle-left"></i>返回</button>
+                    <button id="nextButton" type="button" class="btn btn-default btn-sm btn-next" data-last="刷新">下一步<i class="fa fa-angle-right"></i></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+

@@ -1,0 +1,139 @@
+﻿<div ng-controller="SPMedicationCtrl">
+        <form class="navbar-form " role="search" style="padding-left: 0px">
+            <div class="form-group">
+                <input type="text"  ng-model="pItemSelected" style="width: 300px; padding-right: 25px" uib-typeahead="pid for pid in pIds"
+                       class="form-control gq-input"  typeahead-min-length="0" placeholder="请选择患者ID" typeahead-on-select="" typeahead-click-open typeahead-like-select>
+                <button  ng-click="search(pItemSelected,typeSelection.CohortName);" type="button" class="btn btn-default">搜索</button>
+                <br>
+                <div class="btn-group">
+                    <label ng-repeat="type in dTypes">
+                        <input type="radio" name="myTestRadio" ng-model="typeSelection" ng-value="type" ng-class="{btn: true,
+                        'btn-primary': true}" ng-checked="typeSelection.CohortName == type.CohortName" style="position:relative;
+                        left:0px" ng-click="search(pItemSelected,typeSelection.CohortName);"/>{{type.CohortName}}&nbsp;&nbsp;&nbsp;&nbsp;
+                    </label>
+                </div>
+            </div>
+        </form>
+        <div ng-controller="SimilarPatientsMedStatisticsController" class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget">
+                    <div class="widget-header ">
+                        <span class="widget-caption">相似患者统计</span>
+                        <div class="widget-buttons">
+                            <!--<a href="" widget-maximize ng-click="search(pItemSelected,'toggleMax');"></a>-->
+                            <a href="" widget-collapse></a>
+                            <a href="" widget-dispose></a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <!--<div id="ageBar">Age Bar</div>-->
+
+                        <div id="treemap" style="width: 100%">
+                            <div id="treemapLoading"  ng-class="{true:'loading-spinner'}[isSPDiagnosisGraphLoading]">
+                            </div>
+                            <!--<div class="loading-spinner"></div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-controller="sankeyMedController" class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget">
+                    <div class="widget-header ">
+                        <span class="widget-caption">相似患者用药流程</span>
+                        <div class="widget-buttons">
+                            <!--<a href="" widget-maximize></a>-->
+                            <a href="" widget-collapse></a>
+                            <a href="" widget-dispose></a>
+                        </div>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row" >
+                            <div class="col-xs-4 col-md-4 ">
+                                <div class="widget">
+
+                                    <div class="row" style="margin-left: auto">
+                                        <!--<form name = "cohorts">-->
+                                            <!--<label>选择患者群: </label>-->
+                                            <!--<select name = "cohortsList" id = "cohortsList" ng-model = "cohortslist.model">-->
+                                                <!--<option ng-repeat = "option in cohortslist.lists" value ="{{option.id}}" ng-click="refreshsankey()">{{option.name}}-->
+                                                <!--</option>-->
+                                            <!--</select>-->
+                                        <!--</form>-->
+                                        <div class="input-group">
+
+                                            <label>相似患者数目:</label>
+                                            <input type="text" class="form-control" aria-label="..." placeholder="整数，建议1～10" ng-model="patients">
+                                        </div><!-- /input-group -->
+                                        <!--
+                                        <div class="input-group">
+
+                                            <label>序列数目:</label>
+                                            <input type="text" class="form-control" aria-label="" placeholder="整数，建议2～4" ng-model="patterns">
+                                        </div>
+                                          -->
+
+                                        <!--  <div class="input-group">
+
+                                             <label>事件频率:</label>
+                                             <input type="text" class="form-control" aria-label="..." placeholder="整数" ng-model="values">
+                                         </div> -->
+
+                                        <div class="btn-group" role="group" aria-label="...">
+                                            <button type="button" class="btn btn-default" ng-click="refreshsankey()">刷新序列</button>
+                                        </div>
+
+                                        <!-- frequency-->
+<!--                                         <div style ="margin-top: 10px;">
+                                            <label>事件频率分布</label>
+                                            <svg id = "fre_med">
+
+                                            </svg>
+                                        </div> -->
+                                        <!--end frequency -- >
+
+                                                            <!--tree -->
+
+                                        <!--  <div class="content" ng-controller="appCtrl">
+                                             <div class="feature">
+                                                 <h2><label>序列事件列表</label></h2>
+                                                 <div class="feature-content">
+                                                     <iui-treeview name="{{treeName}}" class="directive" items="items" item-icon="itemIcon" show-check-boxes="true"
+                                                                   checkbox-settings="checkBoxSettings" item-checkstate-changing="itemCheckStateChanging(e)"></iui-treeview>
+
+
+                                                 </div>
+                                             </div>
+                                         </div> -->
+
+
+                                        <!--end tree-->
+
+
+                                    </div><!-- /.row -->
+
+
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-8 col-md-8 left_bars">
+
+
+                                <div  id="chart_sankeys_med" style = "width:100%">
+
+                                      <!--  <div id="chart_sankeys_medLoading"  ng-class="{true:'loading-spinner'}[isGraphLoading]">
+                                       </div> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+

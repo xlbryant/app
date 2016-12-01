@@ -1,0 +1,42 @@
+<head>
+    <style>
+        .Advnode circle {
+            fill: #999;
+        }
+
+        .Advnode text {
+            font: 15px sans-serif;
+        }
+
+        .Advnode--internal circle {
+            fill: #555;
+        }
+
+        .Advnode--internal text {
+            text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+        }
+
+        .Advlink {
+            fill: none;
+            stroke: #555;
+            stroke-opacity: 0.5;
+            stroke-width: 1.5px;
+        }
+
+
+    </style>
+    </head>
+<div ng-controller="AdvReaction1">
+    <h2>输入药品或药物Id：</h2>
+    <div class="col-md-3 column">
+<label >
+
+    <input type="text"   ng-model="vm.selected" uib-typeahead="id for id in vm.Ids | filter:$viewValue | limitTo:8"
+           class="form-control">
+
+</label></div>
+    <div class="col-md-3 column">
+    <button type="button" id="testButton" class="btn btn-primary" ng-click="vm.ShowGraph()">查询</button>
+    </div>
+<div id="AdvGraph" ></div>
+    </div>

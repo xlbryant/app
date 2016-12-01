@@ -1,0 +1,76 @@
+
+<div ng-controller="MkGridController">
+                <form  method="get" class="navbar-form navbar-left" style="padding-left: 0px">
+                    <div class="input-group">
+                        <input class="typeahead" type="text" id="search-wrapper" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <button  id="searchSubmit" ng-click="searchs('',1)" class="btn " type="button"><i class="glyphicon glyphicon-search"></i> 搜 索</button>
+                    </div>
+                </form>
+
+<div class="row" >
+    <div class="col-xs-12 col-md-12">
+        <div class="widget">
+            <div class="widget-header ">
+                <span class="widget-caption">表格</span>
+                <div class="widget-buttons">
+                    <a href="" widget-maximize></a>
+                    <a href="" widget-collapse></a>
+                    <a href="" widget-dispose></a>
+                </div>
+            </div>
+            <div class="widget-body no-padding">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body">
+
+
+                                <div class="g-layout-content">
+                                    <div class="container">
+                                        <ul class="news-list" id="elasticDataShow">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <table id="example1" class="stripe row_border hover" cellspacing="0" width="100%">
+
+                                </table>
+
+                                <ul class="pagination" id="pagination">
+
+                                </ul>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                <!--<div ng-grid="gridOptions" style="min-height:500px; overflow-x:hidden;"></div>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+
+                </h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+</div>

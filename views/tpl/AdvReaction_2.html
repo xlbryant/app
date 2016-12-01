@@ -1,0 +1,320 @@
+<link rel="stylesheet" href="../../styles/local.css"/>
+
+<div ng-controller="AdvReaction2">
+<div class="col-md-12 column"  >
+<!-- 展示病人信息的div -->
+
+
+
+     <div class="col-md-12 column" >
+   <div class="col-md-2 column"><h3 style="margin-bottom: 0;margin-top: 0">个人信息</h3></div>
+     <div class="col-md-9 column" >
+         <label style="margin-bottom: 0;float: left">
+
+         <select class="form-control" ng-model="vm.value" ng-change="vm.Select()" ng-options="Pid for Pid in vm.IdForSelect">
+             <option value=''>&#45;&#45; 请选择病人 &#45;&#45;</option>
+         </select></label>
+     </div>
+
+         <hr>
+         <hr>
+         <p ng-if="!vm.Display()">选择一个病人查看相关药品不良反应的情况</p>
+     </div>
+
+     <div style="margin-top: 1%">
+
+     <div class="col-md-2 column" ng-if="vm.Display()">
+       <img src="../../assets/img/wolf.jpg" style="width:100%">
+     </div>
+     <div class="col-md-5 column" ng-if="vm.Display()">
+
+   <h4>姓名：{{vm.Info.Name}}</h4>
+     <h4>主诊断：{{vm.Info.Diagnosis}}</h4>
+         <h4>药品过敏：{{vm.Info.DrugAdr.toString()}}</h4>
+         <h4>药物过敏：{{vm.Info.MedicationAdr.toString()}}</h4>
+         <h4>所属群体：{{vm.Info.Groups.toString()}}</h4>
+         <h4>身体状况：{{vm.Info.HealthStatus.toString()}}</h4>
+ </div>
+     <div class="col-md-5 column" ng-if="vm.Display()">
+     </div>
+     </div>
+    <hr>
+
+</div>
+
+
+<div class="col-md-12 column">
+<div class="col-md-6 column" style="float:right;height: 50%;">
+    <!--这是用于展示可替代药品的模块-->
+    <div style="height: 50%;overflow: auto">
+        <div  class="modal fade" id="SafeDrugs" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="height:100%">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">可替换药品</h4>
+                    </div>
+                    <div class="modal-body" style="height:300px;overflow:auto">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <th rowspan="1"><input type="checkbox" ng-model="vm.allChecked" ng-change="vm.SafecheckAll(vm.allChecked)"/></th>
+                            <th rowspan="1">药品名</th>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="Safeitem in vm.SafeItems">
+                                <td>
+                                    <input type="checkbox" ng-model="Safeitem.$Safechecked"/>
+                                </td>
+                                <td>
+                                    {{Safeitem.Name}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.Switch()">替换</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <!-- 右边的表格，用于展示医生为病人选择的药品清单 -->
+        <h3>药品清单</h3>
+        <hr>
+        <div style="padding-left: 2%;padding-right: 2%;padding-bottom: 2%;background-color: #FCFCFC">
+        <div style="background-color:#F0F0F0 ">
+        <h4 ng-if="vm.DisplayedItems.length==0" style="color:#5B5B5B">暂无</h4>
+<table class="table table-bordered table-hover" ng-if="vm.DisplayedItems.length > 0">
+  <thead>
+  <tr>
+      <th rowspan="1">药品名</th>
+      <th rowspan="1">推荐度</th>
+      <th rowspan="1">数量</th>
+      <th rowspan="1">操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="item in vm.DisplayedItems">
+
+
+      <td>{{item.Name}}</td>
+	<td style="color:{{item.color}}">{{item.Selectable}}</td>
+      <td><span class="btn btn-primary btn-sm" ng-click="vm.decrementQuantity(item)"><i
+              class="glyphicon glyphicon-minus"></i></span>
+          {{item.Num}}
+      <span class="btn btn-primary btn-sm" ng-click="vm.incrementQuantity(item)"><i
+              class="glyphicon glyphicon-plus"></i></span></td>
+	<td>
+     <span class="btn btn-primary btn-xs" title="查看可替代的药品" ng-mouseenter="item.popover=true"
+               ng-mouseleave="item.popover=false" data-toggle="modal" data-target="#SafeDrugs" ng-click="vm.getIndex(item);vm.WishSub();"><i
+            class="glyphicon glyphicon-zoom-in">替代方案</i></span>
+
+
+
+       <!-- 这个是用于展示药品引起不良反应的原因的模块-->
+        <!--<div class="modal fade" id="{{item.Xid}}-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">原因</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h4>药品名</h4>
+                        <p>{{item.Name}}</p>
+                        <hr>
+                        <h4>推荐程度</h4>
+                        <p>{{item.Selectable}}</p>
+                        <hr>
+                        <h4>建议</h4>
+                        <p>{{item.Reason}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" data-target="#SafeDrugs" ng-click="vm.WishSub()">寻找替代方案</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">完成</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>-->
+
+
+      <span class="btn btn-primary btn-xs" ng-click="vm.removeFromList(item)"><i
+              class="glyphicon glyphicon-remove"></i>移除</span>
+
+    </td>
+  </tr>
+  </tbody>
+  
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!-- 左边的表格，用于展现病人的所有备选药物 -->
+<div class="col-md-6 column ng-scope" style="margin-bottom: 5%">
+<hr>
+      <h3>可选药品</h3>
+
+      <p>在这里搜索想要添加的药品，红色条目表示必然引起不良反应，灰色条目表示可能引起不良反应</p>
+
+<div class="input-group pull-right global-search"  style="margin-bottom:1%">
+  <label class="input-group-addon">搜索</label>
+  <input type="text" id="SearchForDrug" class="form-control" clientidmode="Static" ng-model="vm.filter.$"/>
+  </div>
+<br/>
+<table class="table table-bordered table-hover" ng-if="vm.filter.$">
+  <thead>
+  <tr>
+ <th>添加药品</th>
+    <th ng-repeat="column in vm.columns" ng-if="!column.hidden" ng-click="vm.sort.toggle(column)"
+        ng-class="{sortable: column.sortable !== false}">
+      {{column.label}}
+      <i ng-if="column.name === vm.sort.column && vm.sort.direction"
+         class="glyphicon {{vm.sort.direction|orderClass}}"></i>
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--<tr>
+  <td></td>
+
+    <td><input type="text" ng-model="vm.filter.Name" class="form-control"/></td>
+    <td><input type="text" ng-model="vm.filter.Manufacturer" class="form-control"/></td>
+    <td><input type="text" ng-model="vm.filter.Indication" class="form-control"/></td>
+	<td><input type="text" ng-model="vm.filter.Taboo" class="form-control"/></td>
+    &lt;!&ndash; <td></td> &ndash;&gt;
+  </tr>-->
+
+
+
+  <tr ng-repeat="item in vm.items|filter:vm.filter|orderBy:vm.sort.column:vm.sort.direction===-1|paging:vm.page.index:vm.page.size" style="background-color: {{item.color}}">
+
+      <td><span class="btn btn-primary btn-xs" title="添加" ng-mouseenter="item.popover=true"
+                ng-mouseleave="item.popover=false" data-toggle="modal" data-target="#{{item.model}}" ng-click="vm.AddAdjust(item)"><i
+              class="glyphicon glyphicon-plus-sign"></i></span>
+
+          <!--这是警示框，当医生选择加入可能引起不良反应的药品时会出现-->
+          <div class="modal fade" id="{{item.model}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                          <h4 class="modal-title" style="color:#AE0000">警告</h4>
+                      </div>
+                      <div class="modal-body">
+                              <h4 style="font-weight: bold;color: #2e2e2e">您确定要添加此药品吗？</h4>
+
+                              </br>
+                              <h4 style="font-weight: bold;color: #2e2e2e">该药品可能引起不良反应，原因是</h4>
+                              <p>{{item.Reason}}</p>
+
+
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.AddLine(item)">确定(不推荐)</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+
+
+
+      </td>
+
+    <td >
+      <span style="text-align: left">{{item.Name}}</span>
+      
+    </td>
+    <td class="text-left">
+      <span style="text-align: left">{{item.Manufacturer}}</span>
+      
+    </td>
+    <td class="text-left">
+      <span style="text-align: left">{{item.Indication}}</span>
+      
+    </td>
+	<td class="text-left">
+     <span style="text-align: left"> {{item.Taboo}}</span>
+    </td>
+     <td>
+        <span class="btn btn-primary btn-xs" title="药品详情" ng-mouseenter="item.popover=true"
+              ng-mouseleave="item.popover=false" data-toggle="modal" data-target="#{{item.Xid}}-1"><i
+            class="glyphicon glyphicon-info-sign"></i></span>
+
+         <!--这是在备选药品清单里，用于展示药品详细说明的模块-->
+         <div class="modal fade" id="{{item.Xid}}-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+             <div class="modal-dialog">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                         <h4 class="modal-title">药品说明</h4>
+                     </div>
+                     <div class="modal-body">
+                         <dl>
+                                 <h4 style="font-weight: bold;color: #2e2e2e">药品名称</h4>
+                                 <p>{{item.Name}}</p>
+
+                             <h4 style="font-weight: bold;color: #2e2e2e">药品ID</h4>
+                             <p>{{item.Xid}}</p>
+
+                             <h4 style="font-weight: bold;color: #2e2e2e">生成厂商</h4>
+                             <p>{{item.Manufacturer}}</p>
+
+                             <h4 style="font-weight: bold;color:#ac2925">禁忌</h4>
+                             <p>{{item.Taboo}}</p>
+                         </dl>
+                     </div>
+                    <!-- <div class="modal-footer">
+                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                         <button type="button" class="btn btn-primary" data-dismiss="modal">完成</button>
+                     </div>-->
+                 </div>
+             </div>
+         </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+<!-- 分页 -->
+<div class="row" ng-if="vm.filter.$">
+  <!--<div class="col-md-3">
+  <p>每页显示条目数</p>
+    <select ng-model="vm.page.size" class="form-control" title="每页条目数"
+            ng-options="pageSize for pageSize in [5,10, 20, 100]">
+    </select>
+  </div>-->
+  <div class="col-md-12" style="float:right">
+  
+    <uib-pagination total-items="vm.items|filter:vm.filter|size" ng-model="vm.page.index" max-size="10"
+                items-per-page="vm.page.size"
+                class="pagination-sm pull-right" boundary-links="true">
+	</uib-pagination>
+	
+  </div>
+</div>
+
+<!-- 显示选中的项目 -->
+<!--<div > 选中的项：
+  <label class="label label-success" ng-repeat-start="item in vm.selection()">{{item.Name}}</label><span
+      ng-if="!$last && $index % 5 !== 4">,</span><br ng-repeat-end ng-if="$index % 5 === 4"/>
+</div>-->
+
+</div>
+</div>
+
+
+<br/>
+<br/><br/>
+
+</div>

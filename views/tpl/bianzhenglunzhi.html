@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget">
+            <div class="widget-header bordered-top bordered-palegreen">
+                <div class="widget-buttons">
+                  
+                </div>
+            </div>
+            <div class="widget-body" style="display: block;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>中医妇科(<a ng-click = "showlevel4('中医妇科','overview','')">概述</a>)</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>妇科疾病</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中医妇科']['妇科疾病']">
+                        <a ng-click = "showlevel4('中医妇科','妇科疾病','{{index}}')">{{index}}</a>
+                    </div>
+                    
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>中医诊断</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>1.辨证</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中医诊断']['辨证']">
+                        <a ng-click = "showlevel4('中医诊断','辨证','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                 <div class="row">
+                    <div class="col-sm-12">
+                    <h4>2.常见病</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中医诊断']['常见病']">
+                        <a ng-click = "showlevel4('中医诊断','常见病','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>中医儿科(<a ng-click = "showlevel4('中医儿科','overview','')">概述</a>)</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>各科疾病</h4>
+                    </div>
+                   <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中医儿科']['各科疾病']">
+                        <a ng-click = "showlevel4('中医儿科','各科疾病','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>中医内科(<a ng-click = "showlevel4('中医内科','常见症状','')">常见症状</a>)</h3>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-sm-12">
+                        <h4>各科疾病</h4>
+                    </div>
+                     <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中医内科']['各科疾病']">
+                        <a ng-click = "showlevel4('中医内科','各科疾病','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

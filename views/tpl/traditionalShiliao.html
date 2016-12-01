@@ -1,0 +1,167 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget">
+            <div class="widget-header bordered-top bordered-palegreen">
+                <div class="widget-buttons">
+                </div>
+            </div>
+            <div class="widget-body" style="display: block;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>治疗类</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4>内科方</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['内科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','内科方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4>外科方</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['外科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','外科方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4>五官科方</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['五官科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','五官科方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4>皮肤科方</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['皮肤科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','皮肤科方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4>妇科方</h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['妇科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','妇科方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4><a ng-click = "showlevel3('药膳食疗','治疗类','无茶治疗茶方','','')">无茶治疗茶方</a></h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['无茶治疗茶方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','无茶治疗茶方','{{index}}','')">{{index}}</a>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <h4><a ng-click = "showlevel3('药膳食疗','治疗类','儿科方','','')">儿科方</a></h4>
+                    </div>
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治疗类']['儿科方']">
+                        <a ng-click = "showlevel3('药膳食疗','治疗类','儿科方','{{index}}','')">{{index}}</a>
+                    </div>
+                    
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>治病常用药酒</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['治病常用药酒']">
+                        <a ng-click = "showlevel3('药膳食疗','治病常用药酒','{{index}}','','')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>进补常用药酒</h3>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['进补常用药酒']">
+                        <a ng-click = "showlevel3('药膳食疗','进补常用药酒','{{index}}','','')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>保健类</h3>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['保健类']">
+                        <a ng-click = "showlevel3('药膳食疗','保健类','{{index}}','','')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3>疾病食疗方</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div ng-repeat = "(index,item) in traSearchTree['疾病食疗方']">
+                        <div class="col-sm-12">{{index}}</div>
+                        <div class="col-sm-2" ng-repeat = "(ii,it) in item">
+                            <a ng-click = "showlevel3('药膳食疗','疾病食疗方','{{index}}','{{ii}}','')">{{ii}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true" >
+    <div class="modal-dialog" style="width:70%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="color: #3c8dbc; text-align:center " class="modal-title bigtitle" id="myModalLabel">{{Name}}</h2>
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                </button>
+            </div>
+            <div class="modal-body" du-scroll-container>
+                <div>
+                    <div class = "col-sm-3 col-md-3 col-lg-3" role="complementary">
+                        <ul  class="nav nav-list bs-docs-sidenav affix" id="gundongtiao">
+                            <div ng-repeat = "(indexs,items) in datails">
+                                <!--{{items}}-->
+
+                                <div ng-repeat="(index,iterm) in items" >
+                                    <li class="addAHover modalMenu">
+                                        <a href="#{{index}}" du-smooth-scroll du-scrollspy>
+                                            <i class="fa fa-fw fa-chevron-right iconss"></i>
+                                            {{index}}
+                                        </a>
+                                    </li>
+                                </div>
+
+                                <!--<li ng-click="scrollto('{{index}}')"  ng-if ="index != 'temp'" class = "list-group-item">
+                                    <a>{{index}}</a>
+                                    <i class = "fa fa-fw fa-chevron-right iconss">
+                                    </i>
+                                </li>-->
+
+                            </div>
+                        </ul>
+                    </div>
+                    <div class = "col-sm-9 col-md-9 col-lg-9" role="main">
+                        <div ng-repeat = "(indexs,items) in datails">
+                            <div ng-repeat="(index,item) in items">
+                                <h3 id = '{{index}}' ng-if = "index != 'temp'">{{index}}</h3>
+                                <span ng-repeat="(ii,it) in item">
+                        &nbsp&nbsp{{it[1]}}
+                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>

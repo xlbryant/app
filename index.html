@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="app" ng-controller="AppCtrl">
+    <!-- Head -->
+    <head>
+        <meta charset="utf-8" />
+        <title page-title></title>
+
+        <!--build:css assets/css/assets.min.css-->
+        <!--Basic Styles-->
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="assets/css/weather-icons.min.css" rel="stylesheet" />
+        <link href="assets/css/droidarabickufi.css" rel="stylesheet" />
+        <link href="assets/css/googleapis.css" rel="stylesheet" />
+
+        <link href="assets/css/ng-grid-2.0.11.min.css" rel="stylesheet">
+
+        <!--Beyond styles-->
+        <link href="assets/css/beyond.min.css" rel="stylesheet" />
+        <link href="assets/css/demo.min.css" rel="stylesheet" />
+        <link href="assets/css/typicons.min.css" rel="stylesheet" />
+        <link href="assets/css/animate.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="assets/css/integralui.treeview.css" />
+		
+		<!--endbuild-->
+		
+		<!--build:css css/style.min.css-->
+        <!--Lib CSS-->
+        <link href="lib/cytoscape/cytoscape-panzoom/cytoscape-panzoom.css" rel="stylesheet">
+        <link href="styles/KGstyle.css" rel="stylesheet">
+        <link href="styles/timeline.css" rel="stylesheet">
+        <link href="lib/treeview/integralui.css" rel="stylesheet">
+        <link href="lib/treeview/integralui.checkbox.css" rel="stylesheet">
+        <link href="lib/treeview/integralui.treeview.css" rel="stylesheet">
+        <link href="styles/spSankey.css" rel="stylesheet">
+        <link href="styles/bubble.css" rel="stylesheet">
+        <link href="styles/tableTest.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/css/my.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/css/news.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/css/base.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/typeahead/typeahead.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/datatables/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="lib/medicalKnowledge/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+		<link href="lib/timeline/myhGraph/css/main.css" rel="stylesheet">
+        <link href="lib/timeline/myhGraph/css/global.css" rel="stylesheet">
+        <link href="lib/timeline/myhGraph/HealthGraph.css" rel="stylesheet">
+        <link href="lib/d3/dc/dc.css" rel="stylesheet">
+
+        <link href="styles/my.css" rel="stylesheet">
+        <!--End-->
+
+        <!-- angular tree style -->
+      <link rel="stylesheet" href="assets/css/integralui.css" />
+      <link rel="stylesheet" href="assets/css/integralui.checkbox.css" />
+      <link rel="stylesheet" href="assets/css/main.css" />
+      <!--endbuild-->
+
+    </head>
+    <!-- /Head -->
+    <!-- Body -->
+    <body style="overflow-x: auto">
+        <div ng-show="pageLoading">
+        <div class="loading-container">
+            <div class="loading-progress">
+                <div class="rotator">
+                    <div class="rotator">
+                        <div class="rotator colored">
+                            <div class="rotator">
+                                <div class="rotator colored">
+                                    <div class="rotator colored"></div>
+                                    <div class="rotator"></div>
+                                </div>
+                                <div class="rotator colored"></div>
+                            </div>
+                            <div class="rotator"></div>
+                        </div>
+                        <div class="rotator"></div>
+                    </div>
+                    <div class="rotator"></div>
+                </div>
+                <div class="rotator"></div>
+            </div>
+        </div>
+    </div>
+        <div ui-view></div>
+        <!-- Scripts -->
+        <!--build:js js/libs.min.js-->
+        <script src="lib/jquery/jquery.min.js"></script>
+        <script src="lib/jquery/bootstrap.js"></script>
+        <script src="lib/angular/angular.js"></script>
+
+        <script src="lib/utilities.js"></script>
+        <script src="lib/underscore.js"></script>
+        <script src="lib/store.min.js"></script>
+
+        <script src="lib/angular/angular-animate/angular-animate.js"></script>
+        <script src="lib/angular/angular-cookies/angular-cookies.js"></script>
+        <script src="lib/angular/angular-resource/angular-resource.js"></script>
+        <script src="lib/angular/angular-sanitize/angular-sanitize.js"></script>
+        <script src="lib/angular/angular-touch/angular-touch.js"></script>
+        <script src="lib/angular/angular-scroll/angular-scroll.js"></script>
+
+        <script src="lib/angular/angular-ui-router/angular-ui-router.js"></script>
+        <script src="lib/angular/angular-ocLazyLoad/ocLazyLoad.js"></script>
+        <script src="lib/angular/angular-ngStorage/ngStorage.js"></script>
+        <script src="lib/angular/angular-ui-utils/angular-ui-utils.js"></script>
+        <script src="lib/angular/angular-breadcrumb/angular-breadcrumb.js"></script>
+<!--!!!!!!!!!!!!!!!!ui-bootstrap  updated!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+        <script src="lib/angular/angular-ui-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="lib/treeview/angular.integralui.min.js"></script>
+        <script src="lib/treeview/angular.integralui.checkbox.min.js"></script>
+        <script src="lib/treeview/angular.integralui.lists.min.js"></script>
+        <script src="lib/treeview/angular.integralui.treeview.min.js"></script>
+        <!--timeline-->
+        <script src="lib/timeline/js/timeline.js"></script>
+        <script src="lib/d3/d3.v3.min.js"></script>
+        <!--knowledge graph-->
+        <script src="lib/cytoscape/cytoscape.js"></script>
+        <script src="lib/cytoscape/cytoscape-panzoom/cytoscape-panzoom.js"></script>
+        <script src="lib/cytoscape/cola.js"></script>
+        <script src="lib/cytoscape/cytoscape-cola.js"></script>
+        <script src="lib/cytoscape/handlebars.min.js"></script>
+        <!--similar patients-->
+        <script src="lib/treeview/angular.integralui.checkbox.min.js"></script>
+        <script src="lib/treeview/angular.integralui.lists.min.js"></script>
+        <script src="lib/treeview/angular.integralui.treeview.min.js"></script>
+        <script src="lib/treeview/theme.selector.min.js"></script>
+        <script src="lib/d3/crossfilter.js"></script>
+        <script src="lib/d3/dc/dc.js"></script>
+        <script src="lib/d3/sankey.js"></script>
+        <!--disease caurse-->
+        <script src="lib/d3/melt.js"></script>
+        <script src="lib/d3/queue.v1.min.js"></script>
+        <script src="lib/d3/tip.js"></script>
+        <script src="lib/d3/sankey.js"></script>
+        <!--medical knowledge-->
+        <script src="lib/d3/sankey.js"></script>
+        <script src="lib/medicalKnowledge/fastclick/fastclick.js"></script>
+        <script src="lib/medicalKnowledge/sparkline/jquery.sparkline.min.js"></script>
+        <script src="lib/medicalKnowledge/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="lib/medicalKnowledge/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="lib/medicalKnowledge/chartjs/Chart.min.js"></script>
+        <script src="lib/medicalKnowledge/datatables/jquery.dataTables.min.js"></script>
+        <script src="lib/medicalKnowledge/datatables/dataTables.bootstrap.min.js"></script>
+        <script src="lib/medicalKnowledge/typeahead/typeahead.js"></script>
+        <script src="lib/medicalKnowledge/search/store.min.js"></script>
+        <script src="lib/timeline/myhGraph/js/mustache.js"></script>
+        <script src="lib/timeline/myhGraph/js/hammer.js"></script>
+        <script src="lib/timeline/myhGraph/HealthGraph.js"></script>
+        <script src="lib/timeline/myhGraph/js/hGraphMain.js"></script>
+        <script src="lib/timeline/myhGraph/js/hUsers.js"></script>
+        <script src="lib/timeline/myhGraph/js/hData.js"></script>
+        <script src="lib/svg-pan-zoom.js"></script>
+        <script src="lib/jquery/fuelux/wizard/wizard-custom.js"></script>
+        <script src="lib/angular/ng-grid-2.0.11.js"></script>
+        <!--endbuild-->
+    
+        <!--build:js js/app.min.js-->
+        <!-- App Config and Routing Scripts -->
+        <script src="app/app.js"></script>
+        <script src="app/beyond.js"></script>
+
+        <script src="app/config.js"></script>
+        <script src="app/config.router.js"></script>
+
+        <!-- Layout Related Directives -->
+        <script src="app/directives/loading.js"></script>
+        <script src="app/directives/skin.js"></script>
+        <script src="app/directives/sidebar.js"></script>
+        <script src="app/directives/header.js"></script>
+        <script src="app/directives/navbar.js"></script>
+        <script src="app/directives/widget.js"></script>
+        <script src="app/directives/knowledgeGraph.js"></script>
+
+        <!--controllers-->
+        <script src="app/controllers/diseaseCauseStatistics.js"></script>
+        <script src="app/controllers/graphQueryCtrl.js"></script>
+        <script src="app/controllers/mainCtrl.js"></script>
+        <script src="app/controllers/mkGrid.js"></script>
+        <script src="app/controllers/patientClinicalPathway.js"></script>
+        <script src="app/controllers/sankeyCtrl.js"></script>
+        <script src="app/controllers/sankeyCtrl_med.js"></script>
+        <script src="app/controllers/similarPatientsDiaStatistics.js"></script>
+        <script src="app/controllers/similarPatientsMedStatistics.js"></script>
+        <script src="app/controllers/SPDiagnosisController.js"></script>
+        <script src="app/controllers/SPMedicationCtrl.js"></script>
+        <script src="app/controllers/tableTestCtrl.js"></script>
+        <script src="app/controllers/treeView.js"></script>
+        <script src="app/controllers/CPcomparisonController.js"></script>
+        <script src="app/controllers/MedcareFeeController.js"></script>
+        <script src="app/controllers/traditionalSearchController.js"></script>
+        <script src="app/controllers/traditionalShiliaoController.js"></script>
+        <script src="app/controllers/traditionalSyndromeController.js"></script>
+        <script src="app/controllers/traditionalTuinanController.js"></script>
+        <script src="app/controllers/AdvReaction1.js"></script>
+        <script src="app/controllers/AdvReaction2.js"></script>
+
+        <!--filters-->
+        <script src="app/filters/gridOrderBy.js"></script>
+        <script src="app/filters/orderClass.js"></script>
+        <script src="app/filters/size.js"></script>
+        <script src="app/filters/paging.js"></script>
+
+
+
+        <!--services-->
+        <script src="app/services/constant.js"></script>
+        <script src="app/services/data.js"></script>
+        <script src="app/services/SPDiagnosisSharedData.js"></script>
+        <script src="app/services/SPMedicationSharedData.js"></script>
+        <script src="app/services/httpReject.js"></script>
+        <script src="app/services/traditionalMedical.js"></script>
+
+        <!--endbuild-->
+    </body>
+    <!--  /Body -->
+</html>

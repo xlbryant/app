@@ -1,0 +1,181 @@
+/*treemap css*/
+.loading-spinner{
+  width: 60px;
+  height: 60px;
+  background-color: #2dc3e8;
+  position:relative;
+
+  margin: 200px auto;
+  -webkit-animation: rotateplane 1.2s infinite ease-in-out;
+  animation: rotateplane 1.2s infinite ease-in-out;
+}
+@-webkit-keyframes rotateplane {
+  0% { -webkit-transform: perspective(120px) }
+  50% { -webkit-transform: perspective(120px) rotateY(180deg) }
+  100% { -webkit-transform: perspective(120px) rotateY(180deg)  rotateX(180deg) }
+}
+
+@keyframes rotateplane {
+  0% {
+    transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+    -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+  } 50% {
+      transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+      -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+    } 100% {
+        transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+      }
+}
+/*---------------/Loading Spinner----------------*/
+#chart {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.depth{
+}
+.title {
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+text {
+  pointer-events: none;
+}
+
+.grandparent text {
+  font-weight: bold;
+}
+
+rect {
+  /*fill: none;*/
+  stroke: #fff;
+}
+
+rect.parent,
+.grandparent rect {
+  stroke-width: 2px;
+}
+
+rect.parent {
+  pointer-events: none;
+}
+
+.grandparent rect {
+  fill: orange;
+}
+
+.grandparent:hover rect {
+  fill: #ee9700;
+}
+.treemap-highlight{
+  opacity: 1;
+}
+.treemap-normal{
+  opacity: 0.75;
+}
+.treemap-fade{
+  opacity: 0.5;
+}
+
+.children rect.parent,
+.grandparent rect {
+  cursor: pointer;
+}
+
+.children rect.parent {
+  fill: #bbb;
+  fill-opacity: .1;
+}
+.children{
+}
+.children:hover rect.child {
+  fill: #bbb;
+}
+/*End treemap*/
+
+body {
+  /*background: #293950;*/
+}
+
+.d3-Bartip {
+  z-index: 99999;
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.d3-Bubbletip {
+  z-index: 99999;
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+
+#diseaseCauseContent{
+  /*width:100%;*/
+}
+#bubble{
+  /*position:relative;*/
+  /*top:100;*/
+  width:50%;
+  /*left:10px;*/
+  float:left;
+}
+
+#bar{
+  width:50%;
+  overflow: auto;
+  /*position:relative;*/
+  /*left:55%;*/
+  /*top:200px;*/
+  /*display:inline;*/
+}
+
+.xaxis
+{
+  font-family:Fantasy;
+  /*fill:white;*/
+}
+
+.xaxis path,
+.xaxis line
+{
+  fill:none;
+  stroke:black;
+  shape-rendering: crispEdges;
+  font-size:5px;
+}
+
+.yaxis{
+  display:none;
+}
+
+.featuretext
+{font-family:YouYuan;
+  /*fill:white;*/
+}
+
+
+
+section {
+  margin: 0 auto;
+}
+
+
+circle:hover{opacity:0.8;}
+
+.bar:hover{opacity:0.8;}
+
+.bubbletext
+{font-family:Fantasy;
+  fill:black;
+}

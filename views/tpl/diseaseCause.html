@@ -1,0 +1,34 @@
+﻿<div ng-controller="DiseaseCauseStatisticsController">
+    <form class="navbar-form " role="search" style="padding-left: 0px">
+            <div class="form-group">
+                <input type="text"  ng-model="pItemSelected" style="width: 300px; padding-right: 25px" uib-typeahead="pid for pid in pIds"
+                       class="form-control gq-input"  typeahead-min-length="0" placeholder="请选择患者ID" typeahead-on-select="" typeahead-click-open typeahead-like-select>
+                <button  ng-click="search(pItemSelected);RenderBubbleChart(pItemSelected)" type="button" class="btn btn-default">搜索</button>
+            </div>
+    </form>
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="widget">
+                <div class="widget-header ">
+                    <span class="widget-caption">疾病风险预测</span>
+                    <div class="widget-buttons">
+                        <a href="" widget-maximize ng-click="isMax = !isMax;RenderBubbleChart();"></a>
+                        <a href="" widget-collapse></a>
+                        <a href="" widget-dispose></a>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <div id="diseaseCauseContent">
+                        <div id="bubble"></div>
+                        <div id="bar"></div>
+                    </div>
+                    <!--<h1 align="center">Bubble Chart</h1>-->
+                    <!--<p id="p1" align="center">You can click on the bubble to see the details of its features.</p>-->
+
+                    <section id="graph"></section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

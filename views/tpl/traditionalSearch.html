@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="widget">
+            <div class="widget-header bordered-top bordered-palegreen">
+                <div class="widget-buttons">
+                    <a href="#" data-toggle="maximize">
+                        <i class="fa fa-expand"></i>
+                    </a>
+                    <a href="#" data-toggle="collapse">
+                        <i class="fa fa-minus"></i>
+                    </a>
+                    <a href="#" data-toggle="dispose">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="widget-body" style="display: block;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a ng-click = "showlevel3('抗肿瘤中草药','')">抗肿瘤中草药</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['抗肿瘤中草药']">
+                        <a ng-click = "showlevel3('抗肿瘤中草药','{{index}}')">{{index}}</a>
+                    </div>
+                    
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a ng-click = "showlevel3('抗肿瘤验方','')">抗肿瘤验方</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['抗肿瘤验方']">
+                        <a ng-click = "showlevel3('抗肿瘤验方','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a ng-click = "showlevel3('药膳食疗','')">药膳食疗</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                   <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['药膳食疗']">
+                        <a ng-click = "showlevel3('药膳食疗','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a ng-click = "showlevel3('常用方剂','')">常用方剂</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['常用方剂']">
+                        <a ng-click = "showlevel3('常用方剂','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+                <hr class="wide">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a ng-click = "showlevel3('中药图谱','')">中药图谱</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                     <div class="col-sm-2" ng-repeat = "(index,item) in traSearchTree['中药图谱']">
+                        <a ng-click = "showlevel3('中药图谱','{{index}}')">{{index}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,508 @@
+<!--Cytoscape demo!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+
+<!-- Page Content -->
+<div  style="margin-left: auto" ng-controller="mainController">
+
+
+
+    <!-- Page Header -->
+    <!--<div class="page-header position-relative">-->
+        <!--<div class="header-title">-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Header Buttons&ndash;&gt;-->
+        <!--<div class="header-buttons">-->
+            <!--<a class="sidebar-toggler" href="#/knowledgeGraph/">-->
+                <!--<i class="fa fa-arrows-h"></i>-->
+            <!--</a>-->
+            <!--<a class="refresh" id="refresh-toggler" href="">-->
+                <!--<i class="glyphicon glyphicon-refresh"></i>-->
+            <!--</a>-->
+            <!--<a class="fullscreen" id="fullscreen-toggler" href="#/knowledgeGraph/">-->
+                <!--<i class="glyphicon glyphicon-fullscreen"></i>-->
+            <!--</a>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;Header Buttons End&ndash;&gt;-->
+    <!--</div>-->
+    <!-- /Page Header -->
+    <!-- Page Body -->
+    <!-- 模态框（Modal） -->
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:70%;">
+            <div class="modal-content" id="medDetails" >
+                <!--<span ng-bind-html = "htmlStr">Test</span>-->
+                <!--<div class="modal-header">-->
+                    <!--test-->
+                    <!--<button type="button" class="close"-->
+                            <!--data-dismiss="modal" aria-hidden="true">-->
+                        <!--&times;-->
+                    <!--</button>-->
+                    <!--<h4 class="modal-title" id="myModalLabel">-->
+                        <!--test-->
+                    <!--</h4>-->
+                <!--</div>-->
+                <!--<div class="modal-body">-->
+
+                <!--</div>-->
+
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+         aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:70%;">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h4 class="modal-title">异常</h4>
+                </div>
+                <div id="modalTimeOutDetails" class="modal-body">
+                    <p>正在等待数据
+                    <!--<i class="fa fa-refresh fa-spin"></i>-->
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">重新设置条件</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget">
+                    <div class="widget-header header-small">
+                        <span class="widget-caption">数据查询</span>
+                        <div class="widget-buttons">
+                        <a href widget-maximize>
+                        <i class="fa fa-expand"></i>
+                        </a>
+                        <a href widget-collapse>
+                        <i class="fa fa-minus"></i>
+                        </a>
+                        <a href widget-dispose>
+                        <i class="fa fa-times"></i>
+                        </a>
+                        </div>
+                    </div>
+                    <!--      <div class="widget-body" ng-controller="MainCtrl">
+                            <div ui-grid="gridOptions" ui-grid-pagination class="grid" ui-grid-move-columns>
+                            </div>
+
+                          </div>
+                        -->
+                    <div class="widget-body datadisplay ng-scope" >
+        <form class="navbar-form " role="search">
+            <div class="form-group">
+                <select class="form-control" ng-model="navSearch.typeSelected" ng-options="type.label for type in navSearch.types" ng-change="navSearch.itemSelected = []">
+                    <option value="">-- 请选择类别 --</option>
+                </select>
+                <i class="fa fa-long-arrow-down advancedSearchIcon" aria-hidden="true" ng-click="navSearch.isAdvancedSearchShow = !navSearch.isAdvancedSearchShow;console.log('clicked!')"></i>
+                <input type="text"  ng-model="navSearch.itemSelected" style="width: 300px; padding-right: 25px"
+                       class="form-control " ng-class="{true:'itemsLoading'}[navSearch.isItemsLoading]" typeahead-min-length="0" placeholder="请选择" typeahead-on-select="navSearch.recordItem($item,$label)"
+                       uib-typeahead="state.label for state in navSearch.getStates(navSearch.typeSelected.value,$viewValue)">
+
+                <button  ng-click="navSearch.submitQuery(navSearch.itemSelected)" type="button" class="btn btn-default">搜索</button>
+            </div>
+        </form>
+        <div  ng-controller="GraphQueryController">
+        <!--<div class="widget-body datadisplay ng-scope" >-->
+            <div uib-collapse="!navSearch.isAdvancedSearchShow">
+                <div class="widget-body datadisplay ng-scope" >
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <uib-accordion close-others="false">
+                                <uib-accordion-group index="0" heading="疾病">
+                                    <div ng-repeat="condition in vm.disConditions" class="gq-add">
+                                        <div class="row" >
+                                            <div class="col-md-1" style="width: 10%">
+                                                <select class="form-control" ng-model="vm['disOption_'+condition.num]" ng-options="option.label for option in vm.options track by option.label">
+                                                    <!--<option value="">&#45;&#45; 请选择option &#45;&#45;</option>-->
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3" >
+                                                <select class="form-control" ng-model="vm['disClass_'+condition.num]" ng-options="fclass.label for fclass in vm.disClasses" ng-change="vm['disSelected_'+condition.num]=[]">
+                                                    <option value="">-- 请选择科室 --</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text"  ng-model="vm['disSelected_'+condition.num]" uib-typeahead="state.label for state in vm.getStates('dis',condition.num,$viewValue,vm['disClass_'+condition.num])"
+                                                       class="form-control gq-input" ng-class="{true:'itemsLoading'}[vm.isItemsLoading['disItemsLoading_'+condition.num]]" typeahead-min-length="0" typeahead-select-on-blur="true" typeahead-show-hint="true" placeholder="" typeahead-on-select="vm.recordItem($item,$label)">
+                                            </div>
+                                            <!--<i class="fa fa-spinner fa-pulse"></i>-->
+                                            <!--<button id="submitDisQuery" ng-click="vm.submitQuery('Dis')" type="button" class="btn btn-default">Submit</button>-->
+                                            <div class="col-md-2 " style="width: 14%">
+                                                <button type="submit" class="btn btn-default gq-plus gq-add" ng-click="vm.addCondition(condition.num,'dis')"    ng-if="condition.num === vm.disConditions.length-1"><i class="fa fa-plus-circle fa-2x"></i></button>
+                                                <button type="button" class="btn btn-default gq-minus gq-add" ng-click="vm.removeCondition(condition.num,'dis')" ng-if="vm.disConditions.length > 1"><i class="fa fa-minus-circle fa-3x"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-accordion-group>
+                                <uib-accordion-group index="1" heading="症状">
+                                    <div ng-repeat="condition in vm.symConditions" class="gq-add">
+                                        <div class="row">
+                                            <div class="col-md-1"  style="width: 10%">
+                                                <select class="form-control" ng-model="vm['symOption_'+condition.num]" ng-options="option.label for option in vm.options track by option.label">
+                                                    <!--<option value="">&#45;&#45; 请选择option &#45;&#45;</option>-->
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" ng-model="vm['symFclass_'+condition.num]" ng-options="fclass.label for fclass in vm.fclasses" ng-change="vm['symSelected_'+condition.num]=[]">
+                                                    <option value="">-- 请选择一级科室 --</option>
+                                                </select>
+                                                <div  ng-if="vm['symFclass_'+condition.num].sclasses.length>0">
+                                                    <select class="form-control" ng-model="vm['symSclass_'+condition.num]"
+                                                            ng-options="sclass.label for sclass in vm['symFclass_'+condition.num].sclasses" ng-change="vm['symSelected_'+condition.num]=[]">
+                                                        <option value="">-- 请选择二级科室 --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <select class="form-control" ng-model="vm['symFbody_'+condition.num]" ng-options="fbody.label for fbody in vm.fbodies" ng-change="vm['symSelected_'+condition.num]=[]">
+                                                    <option value="">-- 请选择一级部位 --</option>
+                                                </select>
+                                                <div  ng-if="vm['symFbody_'+condition.num].sbodies.length>0">
+                                                    <select class="form-control" ng-model="vm['symSbody_'+condition.num]"
+                                                            ng-options="sbody.label for sbody in vm['symFbody_'+condition.num].sbodies" ng-change="vm['symSelected_'+condition.num]=[]">
+                                                        <option value="">-- 请选择二级部位 --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5" >
+                                                <form>
+                                                    <input type="text" ng-model="vm['symSelected_'+condition.num]" uib-typeahead="state.label for state in vm.getStates('sym',condition.num,$viewValue,vm['symFclass_'+condition.num],
+                                                vm['symSclass_'+condition.num],vm['symFbody_'+condition.num],vm['symSbody_'+condition.num])"
+                                                           class="form-control" ng-class="{true:'itemsLoading'}[vm.isItemsLoading['symItemsLoading_'+condition.num]]" typeahead-min-length="0" typeahead-on-select="vm.recordItem($item,$label)">
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2" style="width: 14%">
+                                                <button type="submit" class="btn btn-default gq-plus gq-add" ng-click="vm.addCondition(condition.num,'sym')"    ng-if="condition.num === vm.symConditions.length-1"><i class="fa fa-plus-circle"></i></button>
+                                                <button type="button" class="btn btn-default gq-minus gq-add" ng-click="vm.removeCondition(condition.num,'sym')" ng-if="vm.symConditions.length > 1"><i class="fa fa-minus-circle"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-accordion-group>
+                                <uib-accordion-group index="2" heading="辅助检查">
+                                    <div ng-repeat="condition in vm.labConditions" class="gq-add">
+                                        <div class="row">
+                                            <div class="col-md-1" style="width: 10%">
+                                                <select class="form-control" ng-model="vm['labOption_'+condition.num]" ng-options="option.label for option in vm.options track by option.label">
+                                                    <!--<option value="">&#45;&#45; 请选择option &#45;&#45;</option>-->
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select class="form-control" ng-model="vm['labFclass_'+condition.num]" ng-options="fclass.label for fclass in vm.labClasses" ng-change="vm['labSelected_'+condition.num]=[]">
+                                                    <option value="">-- 请选择一级科室 --</option>
+                                                </select>
+                                                <div  ng-if="vm['labFclass_'+condition.num].sclasses.length>0">
+                                                    <select class="form-control" ng-model="vm['labSclass_'+condition.num]"
+                                                            ng-options="sclass.label for sclass in vm['labFclass_'+condition.num].sclasses" ng-change="vm['labSelected_'+condition.num]=[]">
+                                                        <option value="">-- 请选择二级科室 --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <form>
+                                                    <input type="text" ng-model="vm['labSelected_'+condition.num]" uib-typeahead="state.label for state in vm.getStates('lab',condition.num,$viewValue,vm['labFclass_'+condition.num],vm['labSclass_'+condition.num])"
+                                                           class="form-control" ng-class="{true:'itemsLoading'}[vm.isItemsLoading['labItemsLoading_'+condition.num]]" typeahead-min-length="0" typeahead-on-select="vm.recordItem($item,$label)">
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2" style="width: 14%">
+                                                <button type="submit" class="btn btn-default gq-plus gq-add" ng-click="vm.addCondition(condition.num,'lab')"    ng-if="condition.num === vm.labConditions.length-1"><i class="fa fa-plus-circle"></i></button>
+                                                <button type="button" class="btn btn-default gq-minus gq-add" ng-click="vm.removeCondition(condition.num,'lab')" ng-if="vm.labConditions.length > 1"><i class="fa fa-minus-circle"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-accordion-group>
+                                <uib-accordion-group index="3" heading="药品">
+                                    <div ng-repeat="condition in vm.medConditions" class="gq-add">
+                                        <div class="row">
+                                            <div class="col-md-1" style="width: 10%">
+                                                <select class="form-control" ng-model="vm['medOption_'+condition.num]" ng-options="option.label for option in vm.options track by option.label">
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <select class="form-control" ng-model="vm['medFclass_'+condition.num]" ng-options="fclass.label for fclass in vm.medClasses"
+                                                        ng-change="vm['medSelected_'+condition.num]=[]">
+                                                    <option value="">-- 请选择一级科室 --</option>
+                                                </select>
+                                                <div  ng-if="vm['medFclass_'+condition.num].sclasses.length>0">
+                                                    <select class="form-control" ng-model="vm['medSclass_'+condition.num]"
+                                                            ng-options="sclass.label for sclass in vm['medFclass_'+condition.num].sclasses" ng-change="vm['medSelected_'+condition.num]=[]">
+                                                        <option value="">-- 请选择二级科室 --</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <form>
+                                                    <input type="text" ng-model="vm['medSelected_'+condition.num]" uib-typeahead="state.label for state in vm.getStates('med',condition.num,
+                                                $viewValue,vm['medFclass_'+condition.num],vm['medSclass_'+condition.num])"
+                                                           class="form-control" ng-class="{true:'itemsLoading'}[vm.isItemsLoading['medItemsLoading_'+condition.num]]" typeahead-min-length="0"
+                                                           typeahead-on-select="vm.recordItem($item,$label)">
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2" style="width: 14%">
+                                                <button type="submit" class="btn btn-default gq-plus gq-add" ng-click="vm.addCondition(condition.num,'med')"
+                                                        ng-if="condition.num === vm.medConditions.length-1"><i class="fa fa-plus-circle"></i></button>
+                                                <button type="button" class="btn btn-default gq-minus gq-add" ng-click="vm.removeCondition(condition.num,'med')"
+                                                        ng-if="vm.medConditions.length > 1"><i class="fa fa-minus-circle"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </uib-accordion-group>
+                            </uib-accordion>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div ng-if="vm.isSingleShow()">
+                                        <button  ng-click="vm.submitQuery()" type="button" class="btn btn-default gq-searchfor" style="left: 27.5%">搜索</button>
+                                    </div>
+                                    <div ng-if="!vm.isSingleShow()">
+                                        <button id="searchDisease" ng-click="vm.searchDisease()" type="button" class="btn btn-default gq-searchfor">搜索疾病</button>
+                                        <button id="searchMedicine" ng-click="vm.searchMedicine()" type="button" class="btn btn-default gq-searchfor">搜索药品</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row" >-->
+                    <!--<div class="col-md-3">-->
+                    <!--<select class="form-control" ng-model="vm.fclass" ng-options="fclass.label for fclass in vm.fclasses">-->
+                    <!--<option value="">&#45;&#45; 请选择一级科室 &#45;&#45;</option>-->
+                    <!--</select>-->
+                    <!--<div  ng-if="vm.fclass.sclasses.length>0">-->
+                    <!--<select class="form-control" ng-model="vm.sclass"-->
+                    <!--ng-options="sclass.label for sclass in vm.fclass.sclasses">-->
+                    <!--<option value="">&#45;&#45; 请选择二级科室 &#45;&#45;</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3">-->
+                    <!--<select class="form-control" ng-model="vm.fbody" ng-options="fbody.label for fbody in vm.fbodies">-->
+                    <!--<option value="">&#45;&#45; 请选择一级部位 &#45;&#45;</option>-->
+                    <!--</select>-->
+                    <!--<div  ng-if="vm.fbody.sbodies.length>0">-->
+                    <!--<select class="form-control" ng-model="vm.sbody"-->
+                    <!--ng-options="sbody.label for sbody in vm.fbody.sbodies">-->
+                    <!--<option value="">&#45;&#45; 请选择二级部位 &#45;&#45;</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-6">-->
+                    <!--<label>-->
+                    <!--<input type="text" ng-model="vm.selected" uib-typeahead="state.label for state in vm.getStates($viewValue)"-->
+                    <!--class="form-control" typeahead-min-length="0">-->
+                    <!--</label>-->
+                    <!--<button id="submitQuery" ng-click="vm.submitQuery()" type="button" class="btn btn-default">Submit</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="row" >
+                        <div class="col-md-2 my-container" ng-if="vm.historyMem.length>0">
+                            <p style="margin-top: 5px">按某条目搜索历史:</p>
+                        </div>
+                        <div class="col-md-10 my-container">
+                            <div class="btn-group" role="group"  ng-repeat="item in vm.historyMem track by $index">
+                                <button type="button" class="btn btn-default" ng-click="vm.queryAgain(item.id)" ng-if="item">{{item.name}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--test-->
+                    <!--<div  class="aqb-search-form" ng-controller="aqbController">-->
+                    <!--<form name="searchForm" ng-submit="search(searchForm, $event)">-->
+                    <!--<div class="aqb-search-form-body">-->
+                    <!--<div class="aqb-animate-combined" ng-repeat="group in searchContainer.groups | orderBy:'index'">-->
+                    <!--<div search-group-->
+                    <!--search-container="searchContainer"-->
+                    <!--groups="searchContainer.groups"-->
+                    <!--group-index="$index"-->
+                    <!--source-types="sourceTypes"-->
+                    <!--logical-operators="logicalOperators"></div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="aqb-search-form-footer">-->
+                    <!--<button type="submit" class="btn" ng-disabled="searchForm.$invalid">Search</button>-->
+                    <!--</div>-->
+                    <!--</form>-->
+                    <!--<div ng-show="!!output">-->
+                    <!--<pre ng-bind-html="output"></pre>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div>-->
+                    <!--<pre>{{jsonOutput}}</pre>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="widget">
+                    <div class="widget-header " id="testAnchor">
+                        <span class="widget-caption">知识图谱</span>
+                        <div class="widget-buttons">
+                            <a href widget-maximize>
+                                <i class="fa fa-expand"></i>
+                            </a>
+                            <a href widget-collapse>
+                                <i class="fa fa-minus"></i>
+                            </a>
+                            <a href widget-dispose>
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--      <div class="widget-body" ng-controller="MainCtrl">
+                            <div ui-grid="gridOptions" ui-grid-pagination class="grid" ui-grid-move-columns>
+                            </div>
+
+                          </div>
+                        -->
+                    <div class="widget-body datadisplay ng-scope" >
+
+                        <div class="row" ng-controller="tableTestController as vm">
+                            <div class="col-md-3" id="myDetailsTable" du-scroll-container>
+                    <div>
+                    <!--<div class="input-group pull-right global-search">-->
+                        <!--<label class="input-group-addon">全局搜索</label>-->
+                        <!--<input type="text" class="form-control" ng-model="vm.filter.$"/>-->
+                    <!--</div>-->
+                    <table class="table table-bordered table-hover" >
+                        <thead>
+                        <tr>
+                            <th ng-repeat="column in vm.columns" ng-if="!column.hidden" ng-click="vm.sort.toggle(column)"
+                                ng-class="{sortable: column.sortable !== false}">
+                                {{column.label}}
+                                <i ng-if="column.name === vm.sort.column && vm.sort.direction"
+                                   class="glyphicon {{vm.sort.direction|orderClass}}"></i>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody  >
+                        <tr>
+                            <td class="idlength"><input type="text" ng-model="vm.filter.id" class="form-control"/></td>
+                            <td class="namelength"><input type="text" ng-model="vm.filter.name" class="form-control"/></td>
+                            <td class="typelength"><input type="text" ng-model="vm.filter.type" class="form-control"/></td>
+                        </tr>
+                        <tr du-smooth-scroll={{item.id}} du-scrollspy
+                                id={{item.id}}
+                            ng-mouseover="gridMouseover(item.id)"
+                            ng-mouseleave="gridMouseleave(item.id)"
+                            ng-click="gridMouseClick(item.id,item.type)"
+                            ng-repeat="item in vm.items|filter:vm.filter|gridOrderBy:vm.sort.column:vm.sort.direction===-1">
+                            <td  class="idlength" >
+                                <span >{{item.id}}</span>
+                            </td>
+                            <td class="namelength">
+                                <span >{{item.name}}</span>
+                            </td>
+                            <td class="typelength">
+                                <span >{{item.type}}</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                        <!--<div class="row">-->
+                            <!--<div class="col-md-3">-->
+                                <!--<select ng-model="vm.page.size" class="form-control" title="每页条目数"-->
+                                        <!--ng-options="pageSize for pageSize in [5, 20, 100]">-->
+                                <!--</select>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-9">-->
+                                <!--<pagination total-items="vm.items|filter:vm.filter|size" ng-model="vm.page.index" max-size="5"-->
+                                            <!--items-per-page="vm.page.size"-->
+                                            <!--class="pagination-sm pull-right" boundary-links="true"></pagination>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="row">-->
+                        <!--<div class="col-md-12">-->
+                        <!--<p>test!!!!</p>-->
+                            <!--<pagination total-items="vm.items|filter:vm.filter|size" ng-model="vm.page.index" max-size="3"-->
+                                        <!--items-per-page="vm.page.size" previous-text="上一页" next-text="下一页"-->
+                                        <!--class="pagination-sm pull-left" boundary-links="true"></pagination>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                             </div>
+
+                            <div class="col-md-9">
+                    <div id="cy"></div>
+                    <div id="loading">
+                        <i ng-class="{true:'fa fa-refresh fa-spin'}[isGraphLoading] "></i>
+                        <!--<i ng-class="{true:'graphLoading'}[vm.isGraphLoadingTest]"></i>-->
+                        <!--<img src="../data/loading.gif" ng-if="vm.isGraphLoading">-->
+                    </div>
+
+                                <!--<button id="filter" class="btn btn-default"><i class="fa fa-filter"></i></button>-->
+                    <div id="edgeFilter" ng-if="!isGraphLoading && filter.isFilterShow">
+                                <button type="button" class="btn btn-default" ng-click="filter.isCollapsed = !filter.isCollapsed" ><i class="fa fa-filter"></i></button>
+                                <div uib-collapse="filter.isCollapsed" >
+                                    <uib-tabset>
+                                        <uib-tab index="0" heading="边" style="width: 50%">
+                                            <div  class="well" >
+                                                <div id="edgeFilterContent" ng-model="test" ng-repeat="eitem in filterEdgeItems">
+                                                    <input id={{eitem}} class="input-filter" type="checkbox" checked ng-click="edgeFilterClick(eitem)">
+                                                    <label class="label-filter">{{eitem}}</label>
+                                                </div>
+                                                <hr/>
+                                                <input class="input-filter" type="checkbox" checked ng-click="edgeReverseClick()"></input>
+                                                <label class="label-filter">反选</label>
+                                                <input class="input-filter" type="checkbox" checked ng-click="allClickChoose.edgeAllClick()"></input>
+                                                <label class="label-filter">全选</label>
+                                                <hr/>
+                                                    <input class="input-filter" type="checkbox" id="showLevel2_1" checked ng-click="allClickChoose.showLevel2()"></input>
+                                                    <label class="label-filter">二级关系</label>
+
+
+                                            </div>
+                                        </uib-tab>
+                                        <uib-tab index="1" heading="点" style="width: 49.5%">
+                                            <div  class="well" >
+                                                <div id="nodeFilterContent" ng-repeat="nitem in filterNodeItems">
+                                                    <input id={{nitem}} class="input-filter" type="checkbox" checked ng-click="nodeFilterClick(nitem)" ng-disabled="isSearchingDisease == true
+                                                    && nitem == 'disease'|| isSearchingMedicine == true && nitem == 'medicine'"></input>
+                                                    <label class="label-filter">{{nitem}}</label>
+                                                </div>
+                                                <hr/>
+                                                <input class="input-filter" type="checkbox" checked ng-click="nodeReverseClick()"></input>
+                                                <label class="label-filter">反选</label>
+                                                <input class="input-filter" type="checkbox" checked ng-click="allClickChoose.nodeAllClick()"></input>
+                                                <label class="label-filter">全选</label>
+                                                <hr/>
+                                                    <input class="input-filter" type="checkbox" id="showLevel2_2" checked ng-click="allClickChoose.showLevel2()"></input>
+                                                    <label class="label-filter">二级关系</label>
+
+
+                                            </div>
+                                        </uib-tab>
+                                    </uib-tabset>
+
+                                </div>
+                    </div>
+                    <div id="search" style="display: block">
+                        <div  id="eleDetail" >
+                        </div>
+                    </div>
+                    <div id="circlePack"></div>
+                    <div id="refresh"></div>
+
+                <!--<button id="reset" class="btn btn-default"><i class="fa fa-arrows-alt" style="margin-right: 0px;line-height: 1.5"></i></button>-->
+                <!--<button id="refresh" class="btn btn-default"><i class="fa fa-refresh" style="margin-right: 0px;line-height: 1.5"></i></button>-->
+                <!--<button id="filter" class="btn btn-default"><i class="fa fa-filter"></i></button>-->
+                </div>
+                </div>
+    </div>
+</div>
+</div>
+    </div>
+
+</div>
+
